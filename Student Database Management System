@@ -1,0 +1,110 @@
+print("Students Database Management System")
+student_records = {}
+def add_student():
+    student_id = input("Enter student ID: ")
+    name = input("Enter student name: ")
+    age = int(input("Enter student age: "))
+    grade = input("Enter student grade: ")
+    place = input("Enter student place: ")
+    student_records[student_id] = {
+        "name": name,
+        "age": age,
+        "grade": grade,
+        "place": place
+    }
+
+    print(f"Student {name} added successfully!")
+
+
+def view_student(student_id):
+    student = student_records.get(student_id)
+    if student:
+        print("\nStudent Details:")
+        print(f"ID: {student_id}")
+        print(f"Name: {student['name']}")
+        print(f"Age: {student['age']}")
+        print(f"Grade: {student['grade']}")
+        print(f"Place: {student['place']}")
+    else:
+        print("Student not found!Please enter a valid student ID")
+
+
+def update_student(student_id):
+    student = student_records.get(student_id)
+    if student:
+        print("\nCurrent Record:")
+        print(f"Name: {student['name']}")
+        print(f"Age: {student['age']}")
+        print(f"Grade: {student['grade']}")
+        print(f"Place: {student['place']}")
+
+        name = input("Enter new name : ")
+        age = input("Enter new age : ")
+        grade = input("Enter new grade : ")
+        place = input("Enter new place: ")
+
+        if name:
+            student['name'] = name
+        if age:
+            student['age'] = age
+        if grade:
+            student['grade'] = grade
+        if place:
+            student['place'] = place
+
+        print(f"Student {student_id} updated successfully!")
+    else:
+        print("Student not found!Please enter a valid student ID")
+
+
+def delete_student(student_id):
+    if student_id in student_records:
+        del student_records[student_id]
+        print(f"Student {student_id} deleted successfully!")
+    else:
+        print("Student not found!")
+
+
+def display_all_students():
+    if student_records:
+        print("\nAll Student Records:")
+        for student_id, info in student_records.items():
+            print(
+                f"ID: {student_id}, Name: {info['name']}, Age: {info['age']}, Grade: {info['grade']}, Place: {info['place']}")
+    else:
+        print("No student records found.")
+
+
+def main_menu():
+    while True:
+        print("1. Add Student")
+        print("2. View Student Record")
+        print("3. Update Student Record")
+        print("4. Delete Student Record")
+        print("5. Display All Students")
+        print("6. Exit")
+
+        choice = input("Choose an option: ")
+
+        if choice == '1':
+            add_student()
+        elif choice == '2':
+            student_id = input("Enter student ID to view: ")
+            view_student(student_id)
+        elif choice == '3':
+            student_id = input("Enter student ID to update: ")
+            update_student(student_id)
+        elif choice == '4':
+            student_id = input("Enter student ID to delete: ")
+            delete_student(student_id)
+        elif choice == '5':
+            display_all_students()
+        elif choice == '6':
+            print("Exiting the system. Goodbye!")
+            break
+        else:
+            print("Invalid choice, please try again.")
+
+
+if __name__ == "__main__":
+    main_menu()
